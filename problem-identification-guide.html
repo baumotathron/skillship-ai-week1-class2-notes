@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skillship AI - The Art of Problem Identification</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px 60px;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        line-height: 1.8;
+        color: #1a1a1a;
+        background-color: #ffffff;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Print-friendly styles */
+      @media print {
+        body {
+          padding: 20px;
+        }
+        .no-print {
+          display: none;
+        }
+        .page-break {
+          page-break-before: always;
+        }
+      }
+
+      /* Header matching preread style */
+      .header {
+        text-align: left;
+        margin-bottom: 48px;
+        padding-bottom: 24px;
+        border-bottom: 3px solid #000;
+      }
+
+      .logo-section {
+        margin-bottom: 20px;
+      }
+
+      .logo-text {
+        font-size: 1.4em;
+        font-weight: 700;
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        letter-spacing: -0.5px;
+        display: inline-block;
+      }
+
+      .logo-icon {
+        display: inline-block;
+        width: 45px;
+        height: 45px;
+        margin-right: 12px;
+        vertical-align: middle;
+      }
+      
+      .logo-section {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .header h1 {
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-size: 2em;
+        font-weight: 700;
+        margin-bottom: 12px;
+        line-height: 1.3;
+        letter-spacing: -0.5px;
+      }
+
+      .header h2 {
+        color: #4a4a4a;
+        font-size: 1.2em;
+        font-weight: 400;
+        margin-top: 8px;
+        line-height: 1.4;
+      }
+
+      .section-divider {
+        width: 100%;
+        height: 2px;
+        background: #e0e0e0;
+        margin: 48px 0;
+      }
+
+      .section-divider-thin {
+        width: 80%;
+        height: 1px;
+        background: linear-gradient(to right, transparent, #d0d0d0, transparent);
+        margin: 32px auto;
+      }
+
+      /* Content boxes matching preread style */
+      .disclaimer {
+        background-color: #f5f5f5;
+        padding: 24px;
+        border-radius: 4px;
+        border-left: 4px solid #666;
+        margin: 32px 0;
+        page-break-inside: avoid;
+      }
+
+      .disclaimer h3 {
+        color: #000;
+        margin-top: 0;
+        margin-bottom: 12px;
+        font-size: 1.2em;
+        font-weight: 600;
+      }
+
+      .story-box {
+        background-color: #fafafa;
+        padding: 28px;
+        border-radius: 4px;
+        margin: 32px 0;
+        border: 1px solid #e0e0e0;
+        page-break-inside: avoid;
+      }
+
+      .story-box h3 {
+        margin-bottom: 16px;
+      }
+
+      .framework-box {
+        background-color: #fff;
+        padding: 24px;
+        border-radius: 4px;
+        border: 2px solid #e8e8e8;
+        margin: 28px 0;
+        page-break-inside: avoid;
+      }
+
+      .example-box {
+        background-color: #f9f9f9;
+        padding: 20px 24px;
+        border-radius: 4px;
+        border-left: 4px solid #333;
+        margin: 24px 0;
+        page-break-inside: avoid;
+      }
+
+      .exercise-box {
+        background-color: #fafafa;
+        padding: 24px;
+        border-radius: 4px;
+        border: 2px dashed #ccc;
+        margin: 24px 0;
+        page-break-inside: avoid;
+      }
+
+      .think-box {
+        background-color: #fffbf0;
+        padding: 24px;
+        border-radius: 4px;
+        border-left: 4px solid #ff9800;
+        margin: 24px 0;
+        page-break-inside: avoid;
+      }
+
+      .placement-tip {
+        background-color: #f0f8f0;
+        padding: 24px;
+        border-radius: 4px;
+        border-left: 4px solid #2e7d32;
+        margin: 28px 0;
+        page-break-inside: avoid;
+      }
+
+      /* Typography matching preread */
+      h1, h2, h3, h4 {
+        font-family: 'Inter', sans-serif;
+        font-weight: 600;
+        color: #000;
+        page-break-after: avoid;
+      }
+
+      h2 {
+        font-size: 1.8em;
+        margin-top: 56px;
+        margin-bottom: 24px;
+        font-weight: 700;
+        letter-spacing: -0.5px;
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      h3 {
+        font-size: 1.3em;
+        margin-top: 32px;
+        margin-bottom: 16px;
+        font-weight: 600;
+      }
+
+      h4 {
+        font-size: 1.1em;
+        margin-top: 24px;
+        margin-bottom: 12px;
+        font-weight: 600;
+        color: #333;
+      }
+
+      p {
+        margin-bottom: 16px;
+        color: #1a1a1a;
+        line-height: 1.8;
+      }
+
+      strong {
+        font-weight: 600;
+        color: #000;
+      }
+
+      em {
+        font-style: italic;
+      }
+
+      /* Lists */
+      ul, ol {
+        margin: 16px 0;
+        padding-left: 28px;
+      }
+
+      li {
+        margin-bottom: 12px;
+        line-height: 1.7;
+      }
+
+      /* Fix double bullets */
+      .toc ul li,
+      .floating-nav-menu ul li {
+        list-style: none;
+      }
+
+      ul li::marker {
+        color: #9b87f5;
+      }
+
+      ol li::marker {
+        color: #886df2;
+        font-weight: 600;
+      }
+
+      .resource-list {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .resource-list li {
+        margin-bottom: 24px;
+        padding-left: 36px;
+        position: relative;
+        background-color: #f9f9f9;
+        padding: 16px 16px 16px 48px;
+        border-radius: 8px;
+        border-left: 4px solid #9b87f5;
+        transition: all 0.3s ease;
+      }
+
+      .resource-list li:hover {
+        background-color: rgba(155, 135, 245, 0.05);
+        transform: translateX(4px);
+      }
+
+      .resource-list li:before {
+        content: '🔗';
+        position: absolute;
+        left: 16px;
+        top: 16px;
+      }
+
+      .resource-list a {
+        color: #886df2;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .resource-list a:hover {
+        color: #6b4fd8;
+        text-decoration: underline;
+      }
+
+      /* Flow diagram */
+      .flow-diagram {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 40px 0;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .flow-item {
+        background: #333;
+        color: white;
+        padding: 12px 20px;
+        border-radius: 4px;
+        font-weight: 500;
+        text-align: center;
+        min-width: 140px;
+        font-size: 0.95em;
+      }
+
+      .flow-arrow {
+        font-size: 1.6em;
+        color: #333;
+        margin: 0 8px;
+        font-weight: bold;
+      }
+
+      /* Special elements */
+      .highlight {
+        background-color: #fff9c4;
+        padding: 3px 8px;
+        border-radius: 3px;
+        font-weight: 500;
+        color: #000;
+      }
+
+      .question {
+        font-style: italic;
+        color: #555;
+        margin: 20px 0;
+        padding-left: 16px;
+        border-left: 3px solid #ddd;
+        padding: 12px 0 12px 16px;
+      }
+
+      .emoji {
+        font-size: 1.2em;
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        margin-top: 64px;
+        padding-top: 32px;
+        border-top: 2px solid #e0e0e0;
+        color: #666;
+        font-size: 0.9em;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        body {
+          padding: 24px 20px;
+        }
+
+        .header h1 {
+          font-size: 1.6em;
+        }
+
+        .header h2 {
+          font-size: 1em;
+        }
+
+        h2 {
+          font-size: 1.5em;
+        }
+
+        .flow-diagram {
+          flex-direction: column;
+        }
+
+        .flow-arrow {
+          transform: rotate(90deg);
+        }
+      }
+
+      /* Table of contents */
+      .toc {
+        background: linear-gradient(135deg, rgba(136, 109, 242, 0.05) 0%, rgba(155, 135, 245, 0.05) 100%);
+        padding: 32px;
+        border-radius: 12px;
+        border: 2px solid #9b87f5;
+        margin: 32px 0;
+        box-shadow: 0 4px 12px rgba(136, 109, 242, 0.1);
+      }
+
+      .toc h3 {
+        margin-top: 0;
+        margin-bottom: 20px;
+        color: #886df2;
+        font-size: 1.4em;
+      }
+
+      .toc ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      .toc li {
+        margin-bottom: 12px;
+        padding-left: 32px;
+        position: relative;
+        font-size: 1.05em;
+        line-height: 1.6;
+      }
+
+      .toc li:before {
+        content: '◆';
+        position: absolute;
+        left: 8px;
+        color: #9b87f5;
+        font-size: 0.9em;
+      }
+
+      /* Floating Action Buttons Container */
+      .floating-buttons {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 1000;
+      }
+
+      /* Back to Top Button */
+      .back-to-top {
+        width: 56px;
+        height: 56px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .back-to-top.show {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        background-color: #000;
+        transform: translateY(-4px);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      }
+
+      /* Navigation Menu Button */
+      .nav-menu-btn {
+        width: 56px;
+        height: 56px;
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 24px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 16px rgba(136, 109, 242, 0.4);
+        transition: all 0.3s ease;
+      }
+
+      .nav-menu-btn:hover {
+        background: linear-gradient(135deg, #7759e0 0%, #886df2 100%);
+        transform: scale(1.1);
+        box-shadow: 0 6px 20px rgba(136, 109, 242, 0.5);
+      }
+
+      .nav-menu-btn.active {
+        background: linear-gradient(135deg, #6b4fd8 0%, #7759e0 100%);
+      }
+
+      /* Floating Navigation Menu */
+      .floating-nav-menu {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+        padding: 20px;
+        min-width: 280px;
+        max-width: 320px;
+        max-height: 70vh;
+        overflow-y: auto;
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(20px);
+        transition: all 0.3s ease;
+      }
+
+      .floating-nav-menu.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .floating-nav-menu h4 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-size: 1.1em;
+        color: #000;
+        padding-bottom: 12px;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      .floating-nav-menu ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+      }
+
+      .floating-nav-menu li {
+        margin-bottom: 4px;
+      }
+
+      .floating-nav-menu a {
+        text-decoration: none;
+        color: #555;
+        font-size: 0.95em;
+        display: block;
+        padding: 10px 12px;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+      }
+
+      .floating-nav-menu a:hover {
+        background-color: #f5f5f5;
+        color: #000;
+        padding-left: 16px;
+      }
+
+      .floating-nav-menu a.active {
+        background: linear-gradient(135deg, #886df2 0%, #9b87f5 100%);
+        color: #fff;
+        font-weight: 500;
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .floating-buttons {
+          bottom: 20px;
+          right: 20px;
+        }
+
+        .back-to-top,
+        .nav-menu-btn {
+          width: 50px;
+          height: 50px;
+          font-size: 20px;
+        }
+
+        .floating-nav-menu {
+          right: 20px;
+          bottom: 85px;
+          min-width: 260px;
+          max-width: calc(100vw - 40px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Floating Navigation Menu (hidden by default) -->
+    <div class="floating-nav-menu" id="floatingNavMenu">
+      <h4>📑 Quick Navigation</h4>
+      <ul>
+        <li><a href="#top">🏠 Home</a></li>
+        <li><a href="#discovery">🔍 Two Paths to Discovery</a></li>
+        <li><a href="#problem-doctor">👩‍⚕️ Problem Doctor</a></li>
+        <li><a href="#stated-unstated">🗣️ Stated vs Unstated Needs</a></li>
+        <li><a href="#symptoms-causes">🔄 Symptoms to Root Causes</a></li>
+        <li><a href="#frameworks">🛠️ Problem Frameworks</a></li>
+        <li><a href="#exercises">💪 Practical Exercises</a></li>
+        <li><a href="#placement">🎯 Placement Prep</a></li>
+        <li><a href="#resources">📚 Learning Resources</a></li>
+      </ul>
+    </div>
+
+    <!-- Floating Action Buttons -->
+    <div class="floating-buttons">
+      <button class="nav-menu-btn" id="navMenuBtn" onclick="toggleNavMenu()" title="Navigation Menu">
+        ☰
+      </button>
+      <button class="back-to-top" id="backToTop" onclick="scrollToTop()" title="Back to top">
+        ↑
+      </button>
+    </div>
+
+    <div class="header" id="top">
+      <div class="logo-section">
+        <svg class="logo-icon" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="avatar3-face-grad" x1="96" y1="32" x2="96" y2="160" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#F5F3FF"/>
+              <stop offset="1" stop-color="#E4E0FF"/>
+            </linearGradient>
+            <radialGradient id="avatar3-glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(96 96) rotate(90) scale(80 120)">
+              <stop stop-color="#C4B5FD" stop-opacity="0.3"/>
+              <stop offset="1" stop-color="#C4B5FD" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+
+          <!-- Glow background -->
+          <ellipse cx="96" cy="96" rx="80" ry="120" fill="url(#avatar3-glow)"/>
+
+          <!-- Face shape (hexagon) -->
+          <path d="M96 24 L160 64 V 128 L96 168 L32 128 V 64 L96 24 Z"
+                fill="url(#avatar3-face-grad)" stroke="#C4B5FD" stroke-width="3"/>
+
+          <!-- Left eye -->
+          <path d="M70 90 L85 100 L70 110" stroke="#7E69AB" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Right eye -->
+          <path d="M122 90 L107 100 L122 110" stroke="#7E69AB" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- Smile -->
+          <path d="M90 130 C92 134, 100 134, 102 130" stroke="#7E69AB" stroke-width="4" stroke-linecap="round"/>
+          <!-- Forehead diamond (fill and outline) -->
+          <path d="M96 50 L104 62 L96 74 L88 62 L96 50 Z" fill="#9b87f5"/>
+          <path d="M96 50 L104 62 L96 74 L88 62 L96 50 Z" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"/>
+        </svg>
+        <div class="logo-text">Skillship AI</div>
+      </div>
+      <h1>Week 1 Deep Dive: The Art of Problem Identification</h1>
+      <h2>A Comprehensive Guide to identifying, analysing and presenting problem</h2>
+      <div class="section-divider-thin"></div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc no-print">
+      <h3>📑 What You'll Learn in This Guide</h3>
+      <ul>
+        <li>Two Paths to Problem Discovery</li>
+        <li>Becoming a Problem Doctor</li>
+        <li>Stated vs Unstated Needs</li>
+        <li>From Symptoms to Root Causes</li>
+        <li>Problem Definition Frameworks</li>
+        <li>Practical Exercises</li>
+        <li>Placement Preparation Tips</li>
+        <li>Learning Resources</li>
+      </ul>
+    </div>
+
+    <div class="disclaimer">
+      <h3>📚 Disclaimer: Deep Dive Learning</h3>
+      <p>
+        This comprehensive guide will take you deep into the world of problem identification - the most crucial skill
+        for any Product Manager. Some concepts may seem complex initially, but don't worry! Mark your questions and
+        we'll address them in our interactive sessions. Remember, every great product started with someone who noticed a
+        problem others ignored.
+      </p>
+    </div>
+
+    <div class="story-box">
+      <h3>🌟 A Story About Seeing Problems</h3>
+      <p>
+        It's 2008. Three friends are stuck in Paris because they can't afford hotel rooms. Instead of just complaining,
+        they notice something deeper - thousands of people have empty spare rooms, while travelers need affordable
+        places to stay. They don't just see their immediate problem; they see an unstated need across millions of
+        people.
+      </p>
+      <p>That observation became Airbnb, now worth $75 billion.</p>
+      <p>
+        The difference between a regular person and a Product Manager?
+        <strong>PMs see problems as opportunities, not obstacles.</strong> They dig deeper, ask "why" multiple times,
+        and uncover needs people didn't even know they had.
+      </p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="discovery">🔍 Two Paths to Problem Discovery</h2>
+
+    <p>
+      As a Product Manager, you'll discover problems through two main pathways. Understanding both is crucial for your
+      success in the field and will definitely come up in your PM interviews.
+    </p>
+
+    <div class="example-box">
+      <h3>Path 1: Problems Seen or Experienced Firsthand 👁️</h3>
+      <p>
+        This is where you observe daily life around you - your frustrations, your family's struggles, society's pain
+        points.
+      </p>
+
+      <h4>Real Examples:</h4>
+      <ul>
+        <li>
+          <strong>WhatsApp (2009):</strong> Brian Acton couldn't send photos reliably via SMS while traveling. He
+          experienced the problem personally.
+        </li>
+        <li>
+          <strong>Paytm (2010):</strong> Vijay Shekhar Sharma struggled with mobile recharges and bill payments - a very
+          personal Indian problem.
+        </li>
+        <li>
+          <strong>Zomato (2008):</strong> Deepinder Goyal and Pankaj Chaddah were tired of walking down office floors to
+          check lunch menus.
+        </li>
+        <li>
+          <strong>Urban Company:</strong> Founders personally experienced the pain of finding reliable home services in
+          Indian cities.
+        </li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <h3>Path 2: Problems Pointed by Data 📊</h3>
+      <p>
+        For existing products, data reveals problems users might not explicitly state. You analyze user behavior,
+        drop-off points, complaints, and usage patterns.
+      </p>
+
+      <h4>Real Examples:</h4>
+      <ul>
+        <li>
+          <strong>Instagram Stories (2016):</strong> Data showed users were leaving Instagram to use Snapchat. The drop
+          wasn't obvious until they analyzed user session data.
+        </li>
+        <li>
+          <strong>Netflix Autoplay:</strong> Data revealed 70% of users took more than 90 seconds to choose what to
+          watch - a hidden friction point.
+        </li>
+        <li>
+          <strong>Swiggy's Live Tracking:</strong> Customer support data showed 40% of calls were "Where is my order?" -
+          indicating an unstated need for transparency.
+        </li>
+        <li>
+          <strong>PhonePe QR Code:</strong> Data showed users were manually typing UPI IDs, creating errors and
+          friction.
+        </li>
+      </ul>
+    </div>
+
+    <div class="think-box">
+      <h3>🤔 Think About This</h3>
+      <p>
+        <strong>Question for you:</strong> Look at your smartphone right now. What app did you use last? What small
+        frustration did you encounter that you just accepted as "normal"? That's a potential product opportunity waiting
+        to be explored.
+      </p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="problem-doctor">👩‍⚕️ Becoming a Problem Doctor</h2>
+
+    <p>
+      Great Product Managers are like doctors for problems. They don't just treat symptoms; they diagnose root causes.
+      Here's how to develop this critical skill:
+    </p>
+
+    <div class="framework-box">
+      <h3>1. Deep Empathy with Users 💝</h3>
+      <p>Empathy means feeling what your users feel, not just understanding what they say.</p>
+
+      <h4>How to Practice:</h4>
+      <ul>
+        <li>Use your product like your most frustrated user would</li>
+        <li>Spend time with people outside your demographic</li>
+        <li>Watch users navigate your product without helping them</li>
+        <li>Read customer support tickets like stories, not data points</li>
+      </ul>
+
+      <div class="example-box">
+        <h4>Example: Flipkart's Cash on Delivery</h4>
+        <p>
+          In 2010, Flipkart founders could have dismissed users saying "I don't trust online payments." Instead, they
+          empathized deeply. They realized it wasn't about trust - it was about financial control and certainty in a
+          country where most people didn't have credit cards. This empathy led to Cash on Delivery, which revolutionized
+          Indian e-commerce.
+        </p>
+      </div>
+    </div>
+
+    <div class="framework-box">
+      <h3>2. Uncovering Unstated Needs 🕵️</h3>
+      <p>
+        Users often can't articulate their deepest needs. Henry Ford said, "If I asked people what they wanted, they
+        would have said faster horses." Your job is to hear "faster horses" and understand they need "faster
+        transportation."
+      </p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="stated-unstated">🗣️ Stated vs Unstated Needs: The Hidden Goldmine</h2>
+
+    <p>
+      Understanding the difference between what users say they want (stated needs) and what they actually need (unstated
+      needs) is crucial for product success. Most breakthrough products solve unstated needs.
+    </p>
+
+    <div class="example-box">
+      <h3>Stated Needs - What Users Actually Say</h3>
+      <p>These are explicit problems users can clearly articulate and are aware of.</p>
+
+      <h4>Examples:</h4>
+      <ol>
+        <li><strong>"I want to book a cab faster"</strong> - Led to Ola/Uber's one-tap booking</li>
+        <li><strong>"I want to pay bills online"</strong> - Led to Paytm's bill payment feature</li>
+        <li><strong>"I want to order food without calling"</strong> - Led to Swiggy's app-based ordering</li>
+        <li><strong>"I want to watch movies at home"</strong> - Led to Netflix's streaming service</li>
+        <li><strong>"I want to send money to friends easily"</strong> - Led to UPI and digital wallets</li>
+        <li><strong>"I want to learn skills online"</strong> - Led to platforms like Coursera, Unacademy</li>
+        <li><strong>"I want to find restaurants nearby"</strong> - Led to Zomato's restaurant discovery</li>
+      </ol>
+    </div>
+
+    <div class="example-box">
+      <h3>Unstated Needs - What Users Don't Even Know They Want</h3>
+      <p>These are deeper, emotional, or unconscious needs that users haven't explicitly expressed but deeply feel.</p>
+
+      <h4>Examples:</h4>
+      <ol>
+        <li>
+          <strong>Need for social validation</strong> - Instagram Likes weren't requested by users, but fulfilled a deep
+          human need for approval
+        </li>
+        <li>
+          <strong>Need for effortless decision-making</strong> - Netflix's "Because you watched..." wasn't asked for,
+          but solved decision paralysis
+        </li>
+        <li>
+          <strong>Need for financial transparency</strong> - Paytm's transaction history and spending insights weren't
+          requested but provided financial awareness
+        </li>
+        <li>
+          <strong>Need for safety assurance</strong> - Ola/Uber's driver photos and live tracking weren't explicitly
+          demanded but addressed safety anxiety
+        </li>
+        <li>
+          <strong>Need for social connection during transactions</strong> - WhatsApp Pay's integration wasn't requested
+          but made payments feel more personal
+        </li>
+        <li>
+          <strong>Need for progress visualization</strong> - Duolingo's streaks and progress bars weren't demanded but
+          fulfilled the need to see growth
+        </li>
+        <li>
+          <strong>Need for belonging and status</strong> - LinkedIn's endorsements and skill badges weren't requested
+          but satisfied professional recognition needs
+        </li>
+      </ol>
+    </div>
+
+    <div class="think-box">
+      <h3>🎯 How to Identify Unstated Needs</h3>
+      <h4>Techniques to Uncover Hidden Needs:</h4>
+      <ul>
+        <li><strong>Watch, don't just listen:</strong> Observe user behavior, not just their words</li>
+        <li><strong>Ask "Why" 5 times:</strong> Dig deeper into motivations</li>
+        <li><strong>Look for workarounds:</strong> What hacks are users creating?</li>
+        <li><strong>Study emotional reactions:</strong> What makes users frustrated, delighted, or anxious?</li>
+        <li><strong>Analyze the context:</strong> When, where, and why do users need your product?</li>
+        <li><strong>Find the job behind the job:</strong> What is the user ultimately trying to achieve?</li>
+      </ul>
+    </div>
+
+    <div class="exercise-box">
+      <h3>📝 Practice Exercise: Unstated Needs Detection</h3>
+      <p>
+        <strong>Exercise 1:</strong> Next time you're in a long queue (bank, restaurant, DMV), observe people around
+        you. What are they doing? What emotions do you see? What unstated needs can you identify?
+      </p>
+
+      <p>
+        <strong>Exercise 2:</strong> Pick any app you use daily. List 3 stated needs it solves. Now list 3 unstated
+        needs it might be addressing. Example: WhatsApp - Stated: "Send messages free", Unstated: "Feel connected to
+        loved ones instantly"
+      </p>
+
+      <p>
+        <strong>Exercise 3:</strong> Interview a family member about a daily frustration. Ask "why" 5 times. You'll be
+        surprised what unstated needs emerge!
+      </p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="symptoms-causes">🔄 From Symptoms to Root Causes</h2>
+
+    <p>
+      One of the most critical skills for PM interviews and actual PM work is distinguishing between symptoms (what you
+      see) and root causes (why it's happening). Most failed products solve symptoms, not root causes.
+    </p>
+
+    <div class="flow-diagram">
+      <div class="flow-item">Symptoms</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">Assumptions</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">Data & User Testimonies</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-item">Root Causes</div>
+    </div>
+
+    <div class="example-box">
+      <h3>Real Example: Dropouts in Online Learning</h3>
+
+      <h4>Symptom:</h4>
+      <p>"90% of students don't complete online courses"</p>
+
+      <h4>Common Assumptions (Often Wrong):</h4>
+      <ul>
+        <li>Students are lazy</li>
+        <li>Content is too difficult</li>
+        <li>Course is too long</li>
+        <li>Students don't have time</li>
+      </ul>
+
+      <h4>Data Collection:</h4>
+      <ul>
+        <li>User interviews: "I lose motivation after week 2"</li>
+        <li>Analytics: 60% drop-off happens after first assignment</li>
+        <li>Support tickets: "I don't know if I'm learning correctly"</li>
+      </ul>
+
+      <h4>Root Causes Discovered:</h4>
+      <ul>
+        <li>Lack of immediate feedback creates uncertainty</li>
+        <li>No peer interaction leads to isolation</li>
+        <li>Unclear progress indicators cause confusion</li>
+        <li>Content lacks practical application</li>
+      </ul>
+
+      <h4>Solution:</h4>
+      <p>
+        Instead of making courses shorter (symptom-based solution), platforms like Coursera added peer reviews, progress
+        bars, practical projects, and community features (root cause solutions).
+      </p>
+    </div>
+
+    <div class="framework-box">
+      <h3>Questions to Distinguish Symptoms from Root Causes</h3>
+      <ol>
+        <li><strong>"Is this the problem or a result of the problem?"</strong></li>
+        <li><strong>"If we solve this, will similar issues stop recurring?"</strong></li>
+        <li><strong>"What would have to be true for this symptom to exist?"</strong></li>
+        <li><strong>"Are we solving the user's surface request or their deeper need?"</strong></li>
+        <li><strong>"Would fixing this eliminate the user's underlying frustration?"</strong></li>
+      </ol>
+    </div>
+
+    <div class="think-box">
+      <h3>🤔 Practice Scenario</h3>
+      <p><strong>Symptom:</strong> "Users are uninstalling our fitness app after 1 week"</p>
+      <p>
+        <strong>Your turn:</strong> What assumptions might you have? What data would you collect? What could be the root
+        causes? (Think about this before moving to the next section!)
+      </p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="frameworks">🛠️ Problem Definition Frameworks</h2>
+
+    <p>
+      These frameworks are essential for PM interviews and will help you structure your problem-solving approach
+      professionally.
+    </p>
+
+    <div class="framework-box">
+      <h3>1. Problem Statement Framework</h3>
+      <p><strong>Purpose:</strong> Convert vague issues into clear, actionable, and measurable problem definitions.</p>
+
+      <p>
+        <strong>Structure:</strong>
+        <span class="highlight">[User/segment] is struggling with [problem] because [cause], which leads to [impact]</span>
+      </p>
+
+      <h4>Examples:</h4>
+      <div class="example-box">
+        <p>
+          <strong>Good:</strong> "Middle-class Indian families are struggling to save money systematically because they
+          lack awareness of their spending patterns and have no easy way to set aside small amounts regularly, which
+          leads to financial stress and inability to build emergency funds."
+        </p>
+
+        <p><strong>Bad:</strong> "People don't save money" (too vague, no context, no cause, no impact)</p>
+      </div>
+
+      <div class="example-box">
+        <p>
+          <strong>Another Example:</strong> "Small restaurant owners in tier-2 Indian cities are struggling to reach new
+          customers online because they lack digital marketing knowledge and affordable tools, which leads to reduced
+          revenue and business closure during competitive periods."
+        </p>
+      </div>
+    </div>
+
+    <div class="framework-box">
+      <h3>2. Jobs to Be Done (JTBD) Framework</h3>
+      <p><strong>Purpose:</strong> Understand what users are trying to accomplish rather than what product they use.</p>
+
+      <p>
+        <strong>Structure:</strong>
+        <span class="highlight">"When [situation], I want to [motivation], so I can [expected outcome]."</span>
+      </p>
+
+      <h4>Examples:</h4>
+      <div class="example-box">
+        <p>
+          <strong>Netflix:</strong> "When I'm tired after work, I want to watch something entertaining without thinking,
+          so I can relax and unwind."
+        </p>
+
+        <p>
+          <strong>Uber:</strong> "When I'm running late for a meeting, I want reliable transportation immediately, so I
+          can arrive on time and maintain my professional reputation."
+        </p>
+
+        <p>
+          <strong>Instagram:</strong> "When I experience something interesting, I want to share it with people who care
+          about me, so I can feel connected and get social validation."
+        </p>
+      </div>
+    </div>
+
+    <div class="framework-box">
+      <h3>3. 5 Whys Framework</h3>
+      <p><strong>Purpose:</strong> Find the root cause of a surface-level problem by repeatedly asking "why."</p>
+
+      <div class="example-box">
+        <h4>Example: E-commerce Cart Abandonment</h4>
+        <ol>
+          <li>
+            <strong>Why do users abandon their shopping carts?</strong><br>Because they leave at the payment page.
+          </li>
+          <li>
+            <strong>Why do they leave at the payment page?</strong><br>Because they're hesitant to enter credit card
+            details.
+          </li>
+          <li>
+            <strong>Why are they hesitant to enter credit card details?</strong><br>Because they don't trust the
+            security of the website.
+          </li>
+          <li>
+            <strong>Why don't they trust the security?</strong><br>Because there are no visible security badges or
+            trust signals.
+          </li>
+          <li>
+            <strong>Why are there no trust signals?</strong><br>Because we focused on design aesthetics over user
+            confidence.
+          </li>
+        </ol>
+        <p><strong>Root Cause:</strong> Lack of visible trust indicators, not a payment flow problem.</p>
+      </div>
+    </div>
+
+    <div class="framework-box">
+      <h3>4. User Persona Definition</h3>
+      <p><strong>Purpose:</strong> Create a clear representation of your target user(s) based on research</p>
+
+      <h4>What to Include:</h4>
+      <ul>
+        <li><strong>Demographics:</strong> Age, location, income, education</li>
+        <li><strong>Psychographics:</strong> Values, attitudes, motivations</li>
+        <li><strong>Behavioral patterns:</strong> How they currently solve the problem</li>
+        <li><strong>Pain points:</strong> Current frustrations and challenges</li>
+        <li><strong>Goals:</strong> What success looks like for them</li>
+        <li><strong>Context:</strong> When, where, why they need your solution</li>
+      </ul>
+
+      <div class="example-box">
+        <h4>Example Persona: "Priya - The Busy Professional"</h4>
+        <p><strong>Demographics:</strong> 28, Mumbai, ₹8-12 LPA, MBA graduate</p>
+        <p><strong>Quote:</strong> "I want to eat healthy but don't have time to cook or research nutrition"</p>
+        <p><strong>Pain Points:</strong> Long work hours, ordering junk food, guilt about health</p>
+        <p><strong>Goals:</strong> Stay healthy without spending too much time or money</p>
+        <p><strong>Context:</strong> Orders food during office hours, uses phone during commute</p>
+      </div>
+    </div>
+
+    <div class="placement-tip">
+      <h3>🎯 Placement Tip</h3>
+      <p>
+        <strong>Interview Gold:</strong> When asked "How would you improve WhatsApp?", don't immediately suggest
+        features. First, use these frameworks:
+      </p>
+      <ol>
+        <li>Define user personas ("Working professionals in India")</li>
+        <li>
+          Use JTBD ("When I'm in a group chat with office colleagues, I want to communicate professionally, so I can
+          maintain work relationships")
+        </li>
+        <li>Apply 5 Whys to identify root causes</li>
+        <li>Create a problem statement</li>
+      </ol>
+      <p>This structured approach shows PM thinking, not just feature brainstorming.</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="exercises">💪 Practical Exercises</h2>
+
+    <div class="exercise-box">
+      <h3>Exercise 1: Problem Observation Challenge</h3>
+      <p>
+        For the next 7 days, carry a small notebook. Write down 3 problems you observe each day - things that frustrate
+        you, inefficiencies you notice, or needs you see in others. At the end of the week, categorize them as stated vs
+        unstated needs.
+      </p>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Exercise 2: 5 Whys Practice</h3>
+      <p>
+        Pick a common complaint about any popular app (slow loading, confusing interface, etc.). Apply the 5 Whys
+        framework. Compare your root cause with the actual features the company has released to address similar issues.
+      </p>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Exercise 3: JTBD Analysis</h3>
+      <p>
+        Choose 3 apps you use regularly. For each, write their JTBD statement. Then think: what job are they really
+        being hired to do beyond their obvious function? (Example: Instagram isn't just for photo sharing - it's hired
+        for social validation and entertainment)
+      </p>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Exercise 4: Data Detective</h3>
+      <p>
+        Find a public case study of any product pivot (Twitter to X, Instagram adding Stories, etc.). Identify what data
+        or user behavior led to that change. What unstated need did they discover?
+      </p>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Exercise 5: Persona Building</h3>
+      <p>
+        Interview 3 people (family/friends) about their biggest daily frustration. Create personas for each. Practice
+        the problem statement framework for their issues. This will help you in PM interviews when asked to analyze user
+        problems.
+      </p>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Exercise 6: Symptom vs Root Cause</h3>
+      <p>
+        List 5 problems in your college/workplace. For each, identify if it's a symptom or root cause. For symptoms, dig
+        deeper to find root causes. For root causes, think about what symptoms they might create.
+      </p>
+    </div>
+
+    <div class="exercise-box">
+      <h3>Exercise 7: Framework Application</h3>
+      <p>
+        Take any current startup in India (pick from news/funding announcements). Apply all 4 frameworks to analyze
+        their problem space. This type of analysis is commonly asked in PM interviews.
+      </p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="placement">🎯 Placement Preparation Tips</h2>
+
+    <div class="placement-tip">
+      <h3>How to Demonstrate Problem Identification Skills in Interviews</h3>
+
+      <h4>1. Structure Your Answers Using Frameworks</h4>
+      <p>When asked "How would you solve X problem?", always start with:</p>
+      <ul>
+        <li>"Let me first understand the user and their context..."</li>
+        <li>"I'd like to define the problem clearly using a problem statement..."</li>
+        <li>"Let me apply the 5 Whys to ensure we're solving the root cause..."</li>
+      </ul>
+
+      <h4>2. Show Empathy and User Focus</h4>
+      <p>Always mention user emotions and context:</p>
+      <ul>
+        <li>"Users feel frustrated when..."</li>
+        <li>"The emotional impact of this problem is..."</li>
+        <li>"From the user's perspective..."</li>
+      </ul>
+
+      <h4>3. Distinguish Between Stated and Unstated Needs</h4>
+      <p>Impress interviewers by saying:</p>
+      <ul>
+        <li>"While users say they want X, what they really need is Y"</li>
+        <li>"The stated need is clear, but I suspect there's an unstated need for..."</li>
+      </ul>
+    </div>
+
+    <div class="placement-tip">
+      <h3>Common PM Interview Questions About Problem-Solving</h3>
+
+      <h4>1. "How would you improve [popular app]?"</h4>
+      <p><strong>Structure:</strong> User personas → JTBD → Problem identification → 5 Whys → Solution</p>
+
+      <h4>2. "Design a product for [specific user group]"</h4>
+      <p>
+        <strong>Structure:</strong> User research → Problem statement → Unstated needs analysis → Solution frameworks
+      </p>
+
+      <h4>3. "Why do you think [product] failed?"</h4>
+      <p><strong>Structure:</strong> Symptom analysis → Root cause identification → Market/user need mismatch</p>
+
+      <h4>4. "How would you prioritize these problems?"</h4>
+      <p><strong>Structure:</strong> Impact vs effort → User pain severity → Business alignment → Data validation</p>
+    </div>
+
+    <div class="placement-tip">
+      <h3>How to Structure Your Answers</h3>
+      <div class="example-box">
+        <h4>The CIRCLES Method (adapted for problem identification):</h4>
+        <ul>
+          <li><strong>C</strong>larify the problem and context</li>
+          <li><strong>I</strong>dentify the user and their needs</li>
+          <li><strong>R</strong>eport the user's goals and motivations</li>
+          <li><strong>C</strong>ut through assumptions with frameworks</li>
+          <li><strong>L</strong>ist solutions based on root causes</li>
+          <li><strong>E</strong>valuate trade-offs</li>
+          <li><strong>S</strong>ummarize your recommendation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <h2 id="resources">📚 Learning Resources</h2>
+
+    <h3>📖 Essential Articles</h3>
+    <ul class="resource-list">
+      <li>
+        <strong><a href="https://hbr.org/2017/12/what-it-takes-to-become-a-great-product-manager" target="_blank">Harvard Business Review - "What It Takes to Become a Great Product Manager"</a></strong><br>
+        Essential skills and mindset for successful product managers
+      </li>
+
+      <li>
+        <strong><a href="https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/" target="_blank">Nielsen Norman Group - "Why You Only Need to Test with 5 Users"</a></strong><br>
+        Evidence-based approach to user research and testing
+      </li>
+
+      <li>
+        <strong><a href="https://hbr.org/2016/09/know-your-customers-jobs-to-be-done" target="_blank">Jobs to Be Done Framework - Clayton Christensen</a></strong><br>
+        Master the JTBD framework from the creator himself
+      </li>
+
+      <li>
+        <strong><a href="https://www.intercom.com/resources/books/intercom-customer-development" target="_blank">Intercom on Customer Development</a></strong><br>
+        Comprehensive guide to understanding and validating customer problems
+      </li>
+
+      <li>
+        <strong><a href="https://fs.blog/first-principles/" target="_blank">First Principles Problem Solving - Mental Models</a></strong><br>
+        Learn to think from first principles to solve complex problems
+      </li>
+
+
+    </ul>
+
+    <h3>🎥 Must-Watch YouTube Videos</h3>
+    <ul class="resource-list">
+      <li>
+        <strong><a href="https://www.youtube.com/watch?v=MT4Ig2uqjTc" target="_blank">"How to Talk to Users" - Y Combinator</a></strong><br>
+        Learn from startup experts on discovering real customer pain points
+      </li>
+
+      <li>
+        <strong><a href="https://www.youtube.com/watch?v=Qq3OiHQ-HCU" target="_blank">"How to Conduct User Interviews" - Google Ventures</a></strong><br>
+        Practical guide to getting valuable insights from user conversations
+      </li>
+    </ul>
+
+    <h3>📚 Books to Enhance Learning</h3>
+    <ul style="list-style: none; padding-left: 0;">
+      <li style="margin-bottom: 16px; padding: 16px; background-color: #f9f9f9; border-radius: 8px; border-left: 4px solid #9b87f5;"><strong>"The Mom Test" by Rob Fitzpatrick</strong> - Essential for customer interviews</li>
+      <li style="margin-bottom: 16px; padding: 16px; background-color: #f9f9f9; border-radius: 8px; border-left: 4px solid #9b87f5;"><strong>"Competing Against Luck" by Clayton Christensen</strong> - Jobs to Be Done framework</li>
+      <li style="margin-bottom: 16px; padding: 16px; background-color: #f9f9f9; border-radius: 8px; border-left: 4px solid #9b87f5;"><strong>"The Lean Startup" by Eric Ries</strong> - Problem validation methods</li>
+      <li style="margin-bottom: 16px; padding: 16px; background-color: #f9f9f9; border-radius: 8px; border-left: 4px solid #9b87f5;"><strong>"Talking to Humans" by Giff Constable</strong> - User research guide</li>
+      <li style="margin-bottom: 16px; padding: 16px; background-color: #f9f9f9; border-radius: 8px; border-left: 4px solid #9b87f5;"><strong>"UX Research" by Brad Nunnally</strong> - Research methodologies</li>
+    </ul>
+
+
+
+    <div class="section-divider"></div>
+
+    <div class="story-box">
+      <h2>💬 Your Journey Starts Now</h2>
+      <p>
+        Problem identification isn't just a skill - it's a superpower. While others see frustrations, you'll see
+        opportunities. While others accept "that's just how it is," you'll ask "what if we could make this better?"
+      </p>
+
+      <p>
+        Remember:
+        <strong>Every billion-dollar company started with someone who saw a problem others ignored.</strong> Instagram
+        saw that photo-sharing was too complicated. Uber saw that calling a taxi was too uncertain. WhatsApp saw that
+        SMS was too expensive.
+      </p>
+
+      <p>
+        Your job as a future Product Manager is to become a professional problem-spotter. Start today - look around, ask
+        questions, dig deeper. The problems you identify now could become the products that change the world tomorrow.
+      </p>
+
+      <div class="think-box">
+        <h3>🎯 Your Next Steps - Submission Assignment</h3>
+        
+        <h4>📊 Part 1: Create a Google Slides Presentation (Minimum 4 Slides)</h4>
+        <p><strong>Complete at least 4 out of 7 practical exercises from this guide and create one slide for each:</strong></p>
+        <ul>
+          <li><strong>Slide 1:</strong> Problem Observation - Document a real problem you observed with context</li>
+          <li><strong>Slide 2:</strong> 5 Whys Analysis - Show your root cause analysis process</li>
+          <li><strong>Slide 3:</strong> JTBD Framework - Apply to a product you use daily</li>
+          <li><strong>Slide 4:</strong> Unstated Needs - Identify and explain with examples</li>
+        </ul>
+
+        <h4>🎯 Part 2: Work on Your Own Product Idea (5 Slides)</h4>
+        <p><strong>For a problem/product idea you want to explore, create:</strong></p>
+        <ul>
+          <li><strong>Slide 1:</strong> <strong>Symptoms</strong> - What observable issues exist? What do people complain about?</li>
+          <li><strong>Slide 2:</strong> <strong>Assumptions</strong> - What might be causing these symptoms? List your hypotheses</li>
+          <li><strong>Slide 3:</strong> <strong>Data & User Testimonials</strong> - What evidence supports your assumptions? Include user quotes, statistics, or observations</li>
+          <li><strong>Slide 4:</strong> <strong>Problem Statement Framework</strong> - [User] is struggling with [problem] because [cause], which leads to [impact]</li>
+          <li><strong>Slide 5:</strong> <strong>User Persona</strong> - Define your target user with demographics, pain points, goals, and context</li>
+        </ul>
+
+        <h4>📅 Progress Review</h4>
+        <ul>
+          <li><strong>Mid-Week Review:</strong> Share your work-in-progress for feedback</li>
+          <li><strong>Before Next Class:</strong> Complete presentation slides as mentioned</li>
+          <li>Start a "Problem Journal" - write down 1 problem you observe each day</li>
+          <li>Practice one framework daily to build muscle memory</li>
+          <li>Come to class ready to discuss your findings and insights</li>
+        </ul>
+
+        <p><strong>💡 Tip:</strong> The quality of your problem identification will directly impact your solution design. Spend time on this!</p>
+      </div>
+
+      <p>See you in class, where we'll turn your problem identification skills into real product solutions! 🚀</p>
+    </div>
+
+    <div class="section-divider"></div>
+
+    <div class="footer">
+      <p><strong>© 2025 Skillship AI</strong></p>
+      <p>Empowering Future Product Managers</p>
+      <p style="margin-top: 12px;">Ready to build products that matter? Let's make it happen! 🌱</p>
+    </div>
+
+    <script>
+      // Get elements
+      const backToTopButton = document.getElementById('backToTop');
+      const navMenuBtn = document.getElementById('navMenuBtn');
+      const floatingNavMenu = document.getElementById('floatingNavMenu');
+      const sections = document.querySelectorAll('h2[id]');
+      const navLinks = document.querySelectorAll('.floating-nav-menu a');
+
+      // Back to Top Button - Show/Hide based on scroll
+      window.addEventListener('scroll', function() {
+        if (window.pageYOffset > 300) {
+          backToTopButton.classList.add('show');
+        } else {
+          backToTopButton.classList.remove('show');
+        }
+
+        // Highlight active section
+        updateActiveSection();
+      });
+
+      // Scroll to top function
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+
+      // Toggle Navigation Menu
+      function toggleNavMenu() {
+        floatingNavMenu.classList.toggle('show');
+        navMenuBtn.classList.toggle('active');
+        
+        // Change icon when open
+        if (floatingNavMenu.classList.contains('show')) {
+          navMenuBtn.innerHTML = '✕';
+        } else {
+          navMenuBtn.innerHTML = '☰';
+        }
+      }
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!floatingNavMenu.contains(event.target) && 
+            !navMenuBtn.contains(event.target) &&
+            floatingNavMenu.classList.contains('show')) {
+          toggleNavMenu();
+        }
+      });
+
+      // Highlight active section in navigation
+      function updateActiveSection() {
+        let current = '';
+        
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          if (window.pageYOffset >= sectionTop - 100) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        navLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === '#' + current) {
+            link.classList.add('active');
+          }
+        });
+      }
+
+      // Smooth scroll for navigation links
+      navLinks.forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+            
+            // Close menu after clicking
+            if (floatingNavMenu.classList.contains('show')) {
+              toggleNavMenu();
+            }
+          }
+        });
+      });
+
+      // Close menu with Escape key
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && floatingNavMenu.classList.contains('show')) {
+          toggleNavMenu();
+        }
+      });
+
+      // Initialize active section on load
+      updateActiveSection();
+    </script>
+  
+</body>
+</html>
+
